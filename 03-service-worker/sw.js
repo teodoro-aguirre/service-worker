@@ -6,5 +6,5 @@ self.addEventListener('install', event => {
     // Descargar assets
     // Creamos cache
     
-    console.log( 'SW: Instalando SW!!' )
+    console.log( 'SW: Instalando SW!! ' )
 })
