@@ -6,7 +6,7 @@ self.addEventListener('install', event => {
     // Descargar assets
     // Creamos cache
     
-    console.log( 'SW: Instalando SW!! ' )
+    console.log( 'SW: Instalando SW!!' )
 
     const instalacion = new Promise( (resolve, reject) => {
 
@@ -14,13 +14,12 @@ self.addEventListener('install', event => {
             console.log('SW: Instalaciones terminadas');
             self.skipWaiting();
             resolve();
-        }, 1000);
+        }, 1);
 
     })
     // Con esto podemos activarlo al momento de instalar
     // Es recomendable dejarlo sin el sino es necesario
-    // 
-
+    
 
   event.waitUntil( instalacion );  
 })
@@ -30,4 +29,19 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
     // Borrar cache viejo
     console.log('SW2: Activo y listo para controlar la app ')
+})
+
+// FETCH: Manejo de peticiones HTTP
+// Intercepta llamadas 
+
+self.addEventListener('fetch', event => {
+
+    // Aplicar estrategias del cache
+    console.log( 'SW: ', event.request.url )
+
+    if( event.request.url.includes('https://reqres.in/api/users') ){
+        const resp = new Response(`{ ok: false, mensaje: 'jajaja'}`);
+        event.respondWith( resp )
+    }
+
 })
