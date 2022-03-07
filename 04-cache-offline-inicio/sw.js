@@ -9,6 +9,7 @@ self.addEventListener('install', e => {
         .then( cache => {
 
             return cache.addAll([
+                '/',
                 '/index.html',
                 '/css/style.css',
                 '/img/main.jpg',
@@ -20,4 +21,15 @@ self.addEventListener('install', e => {
 
     // Espera a que una promesa se resuelva
     e.waitUntil( cacheProm );
+})
+
+// Las estrategias de cache se hacen en el evento fetch
+self.addEventListener('fetch', e => {
+    // 1 Cache only
+    // Se ocupa cuando toda la aplicacion solo funciona
+    // con el cache
+    e.respondWith( caches.match( e.request ) ) // Lee las respuestas que coinciden con el cache(Todos)
+    
+
+
 })
